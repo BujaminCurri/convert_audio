@@ -1,12 +1,12 @@
 services:
   - type: web
-    name: quiet-transcribe
+    name: convert-audio
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
     # Replace "yourproject" with the folder that contains your settings.py and wsgi.py
     # --timeout 300 gives Gemini up to 5 minutes (the default 30 s is too short for audio)
-    startCommand: gunicorn yourproject.wsgi:application --timeout 300
+    startCommand: gunicorn convert_project.wsgi:application --timeout 300
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
