@@ -34,7 +34,7 @@
 
   <form id="pdf-form" method="post" action="/make-pdf/" hidden>
     {% csrf_token %}
-    {% comment %} <textarea name="text" id="pdf-text"></textarea> {% endcomment %}
+    <textarea name="text" id="pdf-text" hidden></textarea>
   </form>
 
   <script>
