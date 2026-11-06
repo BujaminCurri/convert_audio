@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-f!tw!f=a2vmg7tt&&-l$((o04r3)mv2w@43x+)ji0kji&(_n_8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "convert-audio-3pv9.onrender.com",
+]
 
 
 # Application definition
