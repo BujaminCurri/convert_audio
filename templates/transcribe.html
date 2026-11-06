@@ -23,7 +23,7 @@
     {% csrf_token %}
       <div>
         <label for="audio">Audio file</label>
-        <input type="file" id="audio" name="audio" accept="audio/*" required>
+        <input type="file" id="audio" name="audio" accept="audio/*, .mp3, .wav, .m4a" required>
       </div>
       <div>
         <label for="api_key">Gemini API key <span class="hint">Used for this request only. It is not saved.</span></label>
