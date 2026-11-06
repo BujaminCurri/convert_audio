@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transcript · Quiet Transcribe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Shippori+Mincho:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Quiet Transcribe</a>
+    <a class="link" href="/transcribe">New transcription</a>
+  </header>
+
+  <main>
+    <article class="doc">
+      <h2>Transcript</h2>
+      <p class="meta" id="meta"></p>
+      <div id="transcript"></div>
+
+      <div class="actions">
+        <button class="btn" id="pdf" type="button">Save as PDF</button>
+        <a class="btn quiet" href="/transcribe">Transcribe another</a>
+      </div>
+    </article>
+  </main>
+
+  <form id="pdf-form" method="post" action="/make-pdf/" hidden>
+    {% csrf_token %}
+    <textarea name="text" id="pdf-text"></textarea>
+  </form>
+
+  <script>
+    const box = document.getElementById('transcript');
+    let text = null;
+    let name = '';
+
+    try {
+      text = sessionStorage.getItem('transcript');
+      name = sessionStorage.getItem('filename') || '';
+    } catch (_) {}
+
+    if (text) {
+      // textContent keeps the transcript safe from HTML injection.
+      box.textContent = text;
+      document.getElementById('meta').textContent = name;
+      document.title = (name ? name + ' · ' : '') + 'Transcript';
+    } else {
+      box.textContent = 'No transcript yet. Upload an audio file to create one.';
+      document.getElementById('pdf').hidden = true;
+    }
+
+    document.getElementById('pdf').addEventListener('click', () => {
+      document.getElementById('pdf-text').value = text || '';
+      document.getElementById('pdf-form').submit();
+    });
+  </script>
+</body>
+</html>
